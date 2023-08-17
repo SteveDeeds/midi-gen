@@ -15,6 +15,8 @@ scale = [24,26,28,29,31,33,35, # octave 0
          96,98,100,101,103,105,107, # octave 6
          108,110,112,113,115,117,119,120]  # octave 7
 
+to_chords = ["C", "Dm", "Em", "F", "G", "Am", "Bdim"]
+
 # choose random chord roots
 notes =[]
 for i in range(4):
@@ -25,6 +27,9 @@ for i in range(4):
 
 chords = [notes[0], notes[1], notes[2], notes[2], 
           notes[0], notes[1], notes[3], notes[3]]
+
+for chord in chords:
+    print (F"{to_chords[chord]} ")
 
 for i in range(8):
 # create your MIDI object

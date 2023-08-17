@@ -23,6 +23,6 @@ def rhythm_quarter_notes(scale, mf:MIDIFile, chords, volume, track):
         intervals.append(random.choice(allowed_intervals))
 
     for bar, chord in enumerate(chords):
-        for quarter in range(8):     
+        for quarter in range(4):     
             for i, interval in enumerate(intervals):
                 mf.addNote(track, track, scale[chord+interval]+24, bar*4+quarter, 1, volume)
