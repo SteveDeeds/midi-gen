@@ -32,6 +32,13 @@ def bass_random(scale, mf:MIDIFile, chords, volume, track):
             if intervals[eighth] >= 0:
                 mf.addNote(track, track, scale[chord+intervals[eighth]]+12, bar*4+eighth/2, 0.5, volume)
 
+def bass_wild(scale, mf:MIDIFile, chords, volume, track):
+    allowed_intervals = [-1,-1,-1,-1,0,2,4,7]
+    for bar, chord in enumerate(chords):
+        for eighth in range(8):
+            interval = random.choice(allowed_intervals)
+            mf.addNote(track, track, scale[chord+interval]+12, bar*4+eighth/2, 0.5, volume)
+
 def bass_subdivided(scale, mf:MIDIFile, chords, volume, track):
     intervals =[]
     subdivisions = []
