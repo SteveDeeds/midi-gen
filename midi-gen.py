@@ -24,8 +24,8 @@ chords = random_function()
 
 to_chords = ["C", "Dm", "Em", "F", "G", "Am", "Bdim"]
 
-for chord in chords:
-    print (F"{to_chords[chord]} ", end='')
+print(F"|:{to_chords[chords[0]]}    | {to_chords[chords[1]]}    | {to_chords[chords[2]]}    | {to_chords[chords[3]]}    |")
+print(F"| {to_chords[chords[4]]}    | {to_chords[chords[5]]}    | {to_chords[chords[6]]}    | {to_chords[chords[7]]}   :|")
 
 for i in range(8):
 # create your MIDI object
