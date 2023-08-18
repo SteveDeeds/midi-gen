@@ -19,16 +19,12 @@ scale = [24,26,28,29,31,33,35, # octave 0
 
 functions = [gen_chords.A_A_prime, gen_chords.rock_and_turn]
 random_function = random.choice(functions)
-
+print(random_function)
 chords = random_function()
-
-to_chords = ["C", "Dm", "Em", "F", "G", "Am", "Bdim"]
-
-print(F"|:{to_chords[chords[0]]}    | {to_chords[chords[1]]}    | {to_chords[chords[2]]}    | {to_chords[chords[3]]}    |")
-print(F"| {to_chords[chords[4]]}    | {to_chords[chords[5]]}    | {to_chords[chords[6]]}    | {to_chords[chords[7]]}   :|")
 
 for i in range(8):
 # create your MIDI object
+    print(F"--------------------{i}--------------------")
     mf = MIDIFile(numTracks=16)    
     volume = 100
     ## bass ####################
@@ -37,8 +33,10 @@ for i in range(8):
     mf.addTempo(track, 0, 120)
     mf.addProgramChange(track, track, time=0, program=34) # 34 = Fingered Bass
     mf.addTrackName(track, 0, "bass")
-    functions = [gen_bass.bass_third_eights, gen_bass.bass_root_eights, gen_bass.bass_one_and_four, gen_bass.bass_random, gen_bass.bass_subdivided]
+    functions = [gen_bass.bass_third_eights, gen_bass.bass_root_eights, gen_bass.bass_one_and_four, gen_bass.bass_random, gen_bass.bass_subdivided, gen_bass.bass_wild]
+    # functions = [gen_bass.bass_wild]
     random_function = random.choice(functions)
+    print(random_function)
     random_function(scale, mf, chords, volume, track)
 
     ### pad ####################
@@ -46,8 +44,10 @@ for i in range(8):
     volume = 80
     mf.addProgramChange(track, track, time=0, program=17) # 17 = organ
     mf.addTrackName(track, 0, "pad")
-    functions = [gen_pad.pad_arp, gen_pad.pad_hold]
+    functions = [gen_pad.pad_arp, gen_pad.pad_hold, gen_pad.pad_change]
+    # functions = [gen_pad.pad_arp]
     random_function = random.choice(functions)
+    print(random_function)
     random_function(scale, mf, chords, volume, track)
 
     ## rhythm ####################
@@ -57,6 +57,7 @@ for i in range(8):
     mf.addTrackName(track, 0, "rhythm")
     functions = [gen_rhythm.rhythm_drop_one_eigths, gen_rhythm.rhythm_quarter_notes]
     random_function = random.choice(functions)
+    print(random_function)
     random_function(scale, mf, chords, volume, track)
 
     ### drums ####################
@@ -65,12 +66,17 @@ for i in range(8):
     mf.addProgramChange(track, track, time=0, program=128)
     mf.addTrackName(track, 0, "drums")
     functions = [gen_drums.drums_two_step, gen_drums.drums_probabilistic, gen_drums.drum_subdivided]
+    # functions = [gen_drums.drums_probabilistic]
     random_function = random.choice(functions)
+    print(random_function)
     random_function(scale, mf, chords, volume, track)
 
     # write it to disk
     with open(F"output{i}.mid", 'wb') as outf:
         mf.writeFile(outf)
 
+to_chords = ["C   ", "Dm  ", "Em  ", "F   ", "G   ", "Am  ", "Bdim"]
+print(F"|:{to_chords[chords[0]]}    | {to_chords[chords[1]]}    | {to_chords[chords[2]]}    | {to_chords[chords[3]]}    |")
+print(F"| {to_chords[chords[4]]}    | {to_chords[chords[5]]}    | {to_chords[chords[6]]}    | {to_chords[chords[7]]}   :|")
 
 
